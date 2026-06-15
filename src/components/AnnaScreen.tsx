@@ -568,9 +568,9 @@ export default function AnnaScreen({
             className="text-[20px] font-bold text-gray-800 tracking-wider"
             style={{ fontFamily: '"Calibri", "Candara", sans-serif' }}
           >
-            АННА
+            Анна
           </h2>
-          <div className="flex items-center justify-center gap-1.5 mt-0.5">
+          <div className="flex items-center justify-center gap-1.5 mt-0.5 hidden">
             {/* Soft pulsing color-reactive state indicator */}
             <span className={`w-1.5 h-1.5 rounded-full ${
               annaState === "Слушаю"
@@ -768,7 +768,7 @@ export default function AnnaScreen({
               >
                 {/* Bubble styling using high quality color, border, and shadows */}
                 <div 
-                  className={`rounded-[22px] px-4.5 py-3 relative border ${
+                  className={`rounded-[22px] p-4 relative border ${
                     isAnna 
                       ? "bg-[#FCFAF8] text-gray-800 border-[#F4EFEA] shadow-[0_4px_12px_rgba(43,49,55,0.008)]" 
                       : "bg-[#F3FDF5] text-brand-green-dark border-[#DEEFE1] shadow-[0_4px_12px_rgba(22,181,81,0.012)]"
@@ -779,10 +779,10 @@ export default function AnnaScreen({
                   </span>
 
                   {isAnna ? (
-                    <div className="flex items-start gap-2">
-                      <div className="w-8 h-8 rounded-full overflow-hidden shadow-xs border border-emerald-200/40 flex-shrink-0 relative mt-0.5">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full overflow-hidden border border-emerald-200/60 shadow-sm flex-shrink-0 relative mt-0.5">
                         <img
-                          src={annaAvatarSrc}
+                          src={resolveAvatarByState("Отвечаю", msg.text).src}
                           alt="Анна"
                           className="w-full h-full object-cover"
                         />
@@ -790,7 +790,7 @@ export default function AnnaScreen({
                       <p className="text-[14px] sm:text-[15px] leading-relaxed font-normal text-left pr-5 pt-1.5"
                          style={{ fontFamily: '"Calibri", "Candara", sans-serif' }}
                       >
-                        Анна: {msg.text}
+                        <span className="font-semibold text-emerald-800">Анна:</span> {msg.text}
                       </p>
                     </div>
                   ) : (
