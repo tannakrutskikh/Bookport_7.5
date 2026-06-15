@@ -790,7 +790,7 @@ export default function AnnaScreen({
                       <p className="text-[14px] sm:text-[15px] leading-relaxed font-normal text-left pr-5 pt-1.5"
                          style={{ fontFamily: '"Calibri", "Candara", sans-serif' }}
                       >
-                        <span className="font-semibold text-emerald-800">Анна:</span> {msg.text}
+                        {msg.text}
                       </p>
                     </div>
                   ) : (

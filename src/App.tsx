@@ -1770,7 +1770,7 @@ export default function App() {
                           <span className="absolute bottom-[-1px] right-[-1px] w-2.5 h-2.5 rounded-full bg-[#16B551] border-2 border-white" />
                         </div>
                         <div className={`p-4 rounded-[20px] rounded-bl-[4px] text-[13px] leading-relaxed border shadow-sm ${customStyle.bg} ${customStyle.border} ${customStyle.text}`}>
-                          <p className="font-normal"><span className="font-semibold text-emerald-800">Анна:</span> {msg.text}</p>
+                          <p className="font-normal">{msg.text}</p>
                         </div>
                       </motion.div>
                     );
