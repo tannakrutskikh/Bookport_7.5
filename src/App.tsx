@@ -26,7 +26,7 @@ import StateNowScreen from "./components/StateNowScreen";
 import SettingsScreen from "./components/SettingsScreen";
 import { SystemKeysStore } from "./services/SystemKeysStore";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { resolveGeneralAvatar } from "./utils/annaAvatarResolver";
+import { resolveGeneralAvatar, resolveAvatarByState } from "./utils/annaAvatarResolver";
 
 function generateUniqueAnnaTip(dishName: string, category: string, ingredients: any[]): string {
   const normName = dishName.toLowerCase();
@@ -1765,20 +1765,20 @@ export default function App() {
                         initial={{ opacity: 0, y: 15, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         key={msg.id}
-                        className="flex items-end gap-2 max-w-[85%] self-start pointer-events-auto select-text"
+                        className="flex items-start gap-3 max-w-[85%] self-start pointer-events-auto select-text"
                       >
                         <div className="relative flex-shrink-0">
-                          <div className="w-8 h-8 rounded-full overflow-hidden shadow-xs border border-emerald-200/40">
+                          <div className="w-10 h-10 rounded-full overflow-hidden border border-emerald-200/60 shadow-sm flex-shrink-0 relative mt-0.5">
                             <img 
-                              src={annaAvatarSrc}
+                              src={resolveAvatarByState("Отвечаю", msg.text).src}
                               alt="Анна"
                               className="w-full h-full object-cover"
                             />
                           </div>
                           <span className="absolute bottom-[-1px] right-[-1px] w-2.5 h-2.5 rounded-full bg-[#16B551] border-2 border-white" />
                         </div>
-                        <div className={`px-4 py-2.5 rounded-[20px] rounded-bl-[4px] text-[13px] leading-relaxed border shadow-sm ${customStyle.bg} ${customStyle.border} ${customStyle.text}`}>
-                          <p className="font-normal">{msg.text}</p>
+                        <div className={`p-4 rounded-[20px] rounded-bl-[4px] text-[13px] leading-relaxed border shadow-sm ${customStyle.bg} ${customStyle.border} ${customStyle.text}`}>
+                          <p className="font-normal"><span className="font-semibold text-emerald-800">Анна:</span> {msg.text}</p>
                         </div>
                       </motion.div>
                     );
@@ -1809,12 +1809,12 @@ export default function App() {
                     layout
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    className="flex items-end gap-2 max-w-[85%] self-start pointer-events-auto"
+                    className="flex items-end gap-3 max-w-[85%] self-start pointer-events-auto"
                     key="thinking-bubble"
                   >
-                    <div className="w-8 h-8 rounded-full overflow-hidden shadow-xs border border-emerald-200/40 animate-pulse flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-emerald-200/60 shadow-sm animate-pulse flex-shrink-0 relative mt-0.5">
                       <img 
-                        src={annaAvatarSrc}
+                        src={resolveAvatarByState("Отвечаю", "").src}
                         alt="Анна"
                         className="w-full h-full object-cover"
                       />
