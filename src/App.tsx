@@ -1701,19 +1701,11 @@ export default function App() {
                   id="anna-context-pill"
                 >
                   <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
-                      <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                        overlayState === "Слушаю" ? "bg-amber-400" : (overlayState === "Думаю" ? "bg-blue-400" : "bg-brand-green-bright")
-                      }`} />
-                      <span className={`relative inline-flex rounded-full h-2 w-2 ${
-                        overlayState === "Слушаю" ? "bg-amber-500" : (overlayState === "Думаю" ? "bg-blue-500" : "bg-brand-green-bright")
-                      }`} />
-                    </span>
-                    <span className="font-sans text-[11px] tracking-wide text-gray-700">{getAnnaBubbleStyle(screen).title}</span>
+                    <span className="font-sans text-[12px] tracking-wide text-gray-700 font-bold">Анна</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 border-l border-gray-150 pl-2">
-                    <span className="text-[9px] uppercase tracking-widest text-[#758478] font-bold font-mono">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[9px] uppercase tracking-widest text-[#758478] font-bold font-mono hidden">
                       {overlayState === "На связи" ? "текст-only" : overlayState}
                     </span>
                     <button
