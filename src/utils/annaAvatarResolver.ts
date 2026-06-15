@@ -123,3 +123,33 @@ export function resolveAvatarForTab(tabId: StateNowTabId): AvatarResult {
 export function resolveGeneralAvatar(): AvatarResult {
   return resolveAvatar(generalAvatar)
 }
+
+const stateIntentMap: Record<string, { toneGroup: ToneGroup; intent: string }> = {
+  'На связи': { toneGroup: 'positive', intent: 'affirmation' },
+  'Слушаю': { toneGroup: 'neutral_thoughtful', intent: 'curiosity' },
+  'Думаю': { toneGroup: 'neutral_thoughtful', intent: 'thoughtful' },
+  'Отвечаю': { toneGroup: 'neutral_thoughtful', intent: 'clear_explanation' },
+  'Занята': { toneGroup: 'reminder_caution', intent: 'clarification' },
+}
+
+const textKeywordMap: Array<{ keywords: string[]; toneGroup: ToneGroup; intent: string }> = [
+  { keywords: ['опасно', 'опасность', 'тревожно'], toneGroup: 'reminder_caution', intent: 'warning' },
+  { keywords: ['молодец', 'отлично', 'здорово', 'класс'], toneGroup: 'positive', intent: 'success' },
+  { keywords: ['почему', 'зачем', 'отчего'], toneGroup: 'neutral_thoughtful', intent: 'curiosity' },
+]
+
+export function resolveAvatarByState(state: string, textContext?: string): AvatarResult {
+  if (textContext) {
+    const lower = textContext.toLowerCase()
+    for (const rule of textKeywordMap) {
+      if (rule.keywords.some(kw => lower.includes(kw))) {
+        return resolveAvatar({ toneGroup: rule.toneGroup, intent: rule.intent })
+      }
+    }
+  }
+  const mapping = stateIntentMap[state]
+  if (mapping) {
+    return resolveAvatar({ toneGroup: mapping.toneGroup, intent: mapping.intent })
+  }
+  return resolveGeneralAvatar()
+}

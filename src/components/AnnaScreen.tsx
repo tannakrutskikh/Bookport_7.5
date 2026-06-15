@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import BottomBar from "./BottomBar";
 import { SpeechToTextSession } from "../utils/speechToText";
-import { resolveGeneralAvatar } from "../utils/annaAvatarResolver";
+import { resolveGeneralAvatar, resolveAvatarByState } from "../utils/annaAvatarResolver";
 
 export interface AnnaScreenProps {
   onBack: () => void;
@@ -539,6 +539,8 @@ export default function AnnaScreen({
     }
   };
 
+  const reactiveAvatarSrc = resolveAvatarByState(annaState, messages.length > 0 ? messages[messages.length - 1].text : undefined).src;
+
   return (
     <div 
       className="flex-1 flex flex-col justify-between bg-white min-h-[820px] select-none text-text-main"
@@ -686,7 +688,7 @@ export default function AnnaScreen({
             {/* Inner Circular Avatar Portrait / Orb of Anna */}
             <div className="w-[92px] h-[92px] rounded-full overflow-hidden relative z-10 border-4 border-white shadow-inner">
               <img 
-                src={annaAvatarSrc}
+                src={reactiveAvatarSrc}
                 alt="Анна Коуч" 
                 className={`w-full h-full object-cover select-none pointer-events-none transition-all duration-700 ${
                   annaState === "Слушаю"
